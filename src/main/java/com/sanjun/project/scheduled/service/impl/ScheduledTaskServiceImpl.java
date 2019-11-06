@@ -27,7 +27,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 定时任务实现
  * Created by caozhixin on 2019-11-04 19:10
  */
-@Service
+//@Service
 public class ScheduledTaskServiceImpl implements ScheduledTaskService {
 
     private static final Logger logger = LoggerFactory.getLogger(ScheduledTaskServiceImpl.class);

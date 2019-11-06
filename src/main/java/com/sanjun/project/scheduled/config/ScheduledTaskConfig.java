@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by caozhixin on 2019-11-04 17:38
  */
-@Configuration
+//@Configuration
 public class ScheduledTaskConfig {
     /**
      * 日志

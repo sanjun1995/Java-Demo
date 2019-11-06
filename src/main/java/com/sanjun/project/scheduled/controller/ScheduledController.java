@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 定时任务 controller
  */
-@RestController
+//@RestController
 @RequestMapping("/scheduled")
 public class ScheduledController {
     @Autowired

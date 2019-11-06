@@ -17,8 +17,8 @@ import java.util.List;
  * @see @Order注解的执行优先级是按value值从小到大顺序。
  * 项目启动完毕后开启需要自启的任务
  */
-@Component
-@Order(value = 1)
+//@Component
+//@Order(value = 1)
 public class ScheduledTaskRunner implements ApplicationRunner {
     /**
      * 日志
