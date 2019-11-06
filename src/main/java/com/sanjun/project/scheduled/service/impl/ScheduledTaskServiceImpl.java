@@ -1,7 +1,6 @@
 package com.sanjun.project.scheduled.service.impl;
 
 import com.sanjun.project.scheduled.entity.ScheduledTaskBean;
-import com.sanjun.project.scheduled.mapper.ConfigMapper;
 import com.sanjun.project.scheduled.mapper.ScheduledTaskMapper;
 import com.sanjun.project.scheduled.service.ScheduledTaskJob;
 import com.sanjun.project.scheduled.service.ScheduledTaskService;
@@ -49,9 +48,9 @@ public class ScheduledTaskServiceImpl implements ScheduledTaskService {
     /**
      * 所有定时任务存放Map
      */
-    @Autowired
-    @Qualifier(value = "scheduledTaskJobMap")
-    private Map<String, ScheduledTaskJob> scheduledTaskJobMap;
+//    @Autowired
+//    @Qualifier(value = "scheduledTaskJobMap")
+//    private Map<String, ScheduledTaskJob> scheduledTaskJobMap;
 
     /**
      * 存放已经启动的任务map
@@ -65,12 +64,11 @@ public class ScheduledTaskServiceImpl implements ScheduledTaskService {
     @Override
     public List<ScheduledTaskBean> taskList() {
         logger.info(">>>>>> 获取任务列表开始 >>>>>> ");
-        //数据库查询所有任务 => 未做分页
+        // 数据库查询所有任务 => 未做分页
         List<ScheduledTaskBean> taskBeanList = scheduledTaskMapper.getAllTask();
         if (CollectionUtils.isEmpty(taskBeanList)) {
             return new ArrayList<>();
         }
-
         for (ScheduledTaskBean taskBean : taskBeanList) {
             String taskKey = taskBean.getTaskKey();
             // 是否启动标记处理
@@ -95,10 +93,8 @@ public class ScheduledTaskServiceImpl implements ScheduledTaskService {
                 logger.info(">>>>>> 当前任务已经启动，无需重复启动！");
                 return false;
             }
-            // 校验任务是否存在
-            if (!scheduledTaskJobMap.containsKey(taskKey)) {
-                return false;
-            }
+            // 更改startFlag值
+            scheduledTaskMapper.updateStartFlag(1, taskKey);
             // 根据key数据库获取任务配置信息
             ScheduledTaskBean scheduledTask = scheduledTaskMapper.getByKey(taskKey);
             // 启动任务
@@ -106,7 +102,7 @@ public class ScheduledTaskServiceImpl implements ScheduledTaskService {
         } finally {
             // 释放锁
             lock.unlock();
-            logger.info(">>>>>> 释放任务启动锁完毕");
+            logger.info(">>>>>> 释放任务启动锁完毕 >>>>>");
         }
         logger.info(">>>>>> 启动任务 {} 结束 >>>>>>", taskKey);
         return true;
@@ -122,6 +118,8 @@ public class ScheduledTaskServiceImpl implements ScheduledTaskService {
         boolean taskStartFlag = scheduledFutureMap.containsKey(taskKey);
         logger.info(">>>>>> 当前任务实例是否存在 {}", taskStartFlag);
         if (taskStartFlag) {
+            // 更改startFlag值
+            scheduledTaskMapper.updateStartFlag(0, taskKey);
             // 获取任务实例
             ScheduledFuture scheduledFuture = scheduledFutureMap.get(taskKey);
             // 关闭实例
@@ -174,7 +172,8 @@ public class ScheduledTaskServiceImpl implements ScheduledTaskService {
         // 定时表达式
         String taskCron = scheduledTask.getTaskCron();
         // 获取需要定时调度的接口
-        ScheduledTaskJob scheduledTaskJob = scheduledTaskJobMap.get(taskKey);
+        ScheduledTaskJob scheduledTaskJob = new ScheduledTask(taskKey);
+//        ScheduledTaskJob scheduledTaskJob = scheduledTaskJobMap.get(taskKey);
         logger.info(">>>>>> 任务 [ {} ] ,cron={}", scheduledTask.getTaskDesc(), taskCron);
         ScheduledFuture scheduledFuture = threadPoolTaskScheduler.schedule(scheduledTaskJob,
                 new Trigger() {
@@ -184,7 +183,7 @@ public class ScheduledTaskServiceImpl implements ScheduledTaskService {
                         return cronTrigger.nextExecutionTime(triggerContext);
                     }
                 });
-        //将启动的任务放入 map
+        // 将启动的任务放入 map
         scheduledFutureMap.put(taskKey, scheduledFuture);
     }
 

@@ -1,6 +1,6 @@
-package com.sanjun.project.scheduled.mapper;
+package com.sanjun.project.quartz2.mapper;
 
-import com.sanjun.project.scheduled.entity.Config;
+import com.sanjun.project.quartz2.entity.Config;
 import org.apache.ibatis.annotations.*;
 
 /**

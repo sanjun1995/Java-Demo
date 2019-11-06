@@ -1,9 +1,9 @@
-package com.sanjun.project.scheduled.entity;
+package com.sanjun.project.quartz2.entity;
 
 import lombok.Data;
 
 /**
- * Created by caozhixin on 2019-11-04 14:49
+ * Created by caozhixin on 2019-11-05 17:55
  */
 @Data
 public class Config {

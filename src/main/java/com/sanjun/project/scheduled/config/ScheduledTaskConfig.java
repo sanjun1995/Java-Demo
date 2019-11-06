@@ -36,9 +36,9 @@ public class ScheduledTaskConfig {
      * key: 任务key
      * value: 执行接口实现
      */
-    @Bean(name = "scheduledTaskJobMap")
-    public Map<String, ScheduledTaskJob> scheduledTaskJobMap() {
-        return ScheduledTaskEnum.initScheduledTask();
-    }
+//    @Bean(name = "scheduledTaskJobMap")
+//    public Map<String, ScheduledTaskJob> scheduledTaskJobMap() {
+//        return ScheduledTaskEnum.initScheduledTask();
+//    }
 
 }

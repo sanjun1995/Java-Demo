@@ -4,6 +4,7 @@ import com.sanjun.project.scheduled.entity.ScheduledTaskBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -31,4 +32,10 @@ public interface ScheduledTaskMapper {
      */
     @Select("select task_key as taskKey,task_desc as taskDesc,task_cron as taskCron,init_start_flag as initStartFlag  from scheduled_task ")
     List<ScheduledTaskBean> getAllTask();
+
+    /**
+     * 更新任务启动状态
+     */
+    @Update("update scheduled_task set init_start_flag = #{initStartFlag} where task_key = #{taskKey}")
+    int updateStartFlag(@Param("initStartFlag") Integer initStartFlag, @Param("taskKey") String taskKey);
 }

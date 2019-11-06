@@ -1,6 +1,6 @@
-package com.sanjun.project.scheduled.config;
+package com.sanjun.project.quartz2.config;
 
-import com.sanjun.project.scheduled.service.impl.ScheduledTask;
+import com.sanjun.project.quartz2.service.Task;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Trigger;
 import org.springframework.context.annotation.Bean;
@@ -13,10 +13,10 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
  * Created by caozhixin on 2019-11-04 14:53
  */
 @Slf4j
-@Configuration
+//@Configuration
 public class QuartzConfig {
     @Bean(name = "jobDetail")
-    public MethodInvokingJobDetailFactoryBean detailFactoryBean(ScheduledTask task) {
+    public MethodInvokingJobDetailFactoryBean detailFactoryBean(Task task) {
         MethodInvokingJobDetailFactoryBean jobDetail = new MethodInvokingJobDetailFactoryBean();
         jobDetail.setConcurrent(false);
         jobDetail.setName("srd-scheduled");
@@ -49,5 +49,4 @@ public class QuartzConfig {
         log.info("scheduler 初始化成功！");
         return factoryBean;
     }
-
 }

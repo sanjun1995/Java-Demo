@@ -1,6 +1,6 @@
-package com.sanjun.project.scheduled.service.impl;
+package com.sanjun.project.quartz2.service;
 
-import com.sanjun.project.scheduled.mapper.ConfigMapper;
+import com.sanjun.project.quartz2.mapper.ConfigMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,9 @@ import javax.annotation.Resource;
  * Created by caozhixin on 2019-11-04 15:17
  */
 @Slf4j
-@Configuration
-@EnableScheduling
-@Component
+//@Configuration
+//@EnableScheduling
+//@Component
 public class ScheduleRefreshService {
 
     private ConfigMapper configMapper;

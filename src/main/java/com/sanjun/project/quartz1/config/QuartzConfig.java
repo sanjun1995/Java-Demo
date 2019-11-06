@@ -1,7 +1,7 @@
-package com.sanjun.project.quartz.config;
+package com.sanjun.project.quartz1.config;
 
-import com.sanjun.project.quartz.task.TestTask1;
-import com.sanjun.project.quartz.task.TestTask2;
+import com.sanjun.project.quartz1.task.TestTask1;
+import com.sanjun.project.quartz1.task.TestTask2;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
 

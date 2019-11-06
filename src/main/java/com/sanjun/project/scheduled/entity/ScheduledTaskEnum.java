@@ -1,9 +1,8 @@
 package com.sanjun.project.scheduled.entity;
 
 import com.sanjun.project.scheduled.service.ScheduledTaskJob;
-import com.sanjun.project.scheduled.service.impl.ScheduledTask01;
-import com.sanjun.project.scheduled.service.impl.ScheduledTask02;
-import com.sanjun.project.scheduled.service.impl.ScheduledTask03;
+import com.sanjun.project.scheduled.service.impl.ScheduledTask;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,11 +12,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by caozhixin on 2019-11-04 17:51
  */
 public enum ScheduledTaskEnum {
-    TASK_01("scheduledTask01", new ScheduledTask01()),
+    TASK_01("scheduledTask01", new ScheduledTask("scheduledTask01")),
 
-    TASK_02("scheduledTask02", new ScheduledTask02()),
+    TASK_02("scheduledTask02", new ScheduledTask("scheduledTask02")),
 
-    TASK_03("scheduledTask01", new ScheduledTask03());
+    TASK_03("scheduledTask03", new ScheduledTask("scheduledTask03"));
 
     // 定时任务key
     private String taskKey;

@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.sanjun.project.scheduled.mapper")
+@MapperScan({"com.sanjun.project.scheduled.mapper", "com.sanjun.project.quartz2.mapper"})
 public class ProjectApplication {
 
     public static void main(String[] args) {
