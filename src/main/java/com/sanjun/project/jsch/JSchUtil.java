@@ -44,8 +44,9 @@ public class JSchUtil {
         logger.info("connSession => host: {}, username: {}, prvkey: {}", host, username, prvkey);
         JSch jSch = new JSch();
         try {
-            jSch.addIdentity(prvkey);
+//            jSch.addIdentity(prvkey);
             session = jSch.getSession(username, host);
+            session.setPassword(prvkey);
             session.setConfig("StrictHostKeyChecking", "no");
             session.connect();
         } catch (JSchException e) {
